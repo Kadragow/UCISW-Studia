@@ -1,0 +1,27 @@
+Running: G:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\fuse.exe -intstyle ise -incremental -o C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main_main_sch_tb_isim_beh.exe -prj C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main_main_sch_tb_beh.prj main_main_sch_tb 
+ISim P.20131013 (signature 0x7708f090)
+Number of CPUs detected in this system: 6
+Turning on mult-threading, number of parallel sub-compilation jobs: 12 
+Determining compilation order of HDL files
+Parsing VHDL file "C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/SendSample.vhd" into library work
+Parsing VHDL file "C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf" into library work
+Parsing VHDL file "C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/simu.vhd" into library work
+Starting static elaboration
+WARNING:HDLCompiler:89 - "C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf" Line 140: <wavreader> remains a black-box since it has no binding entity.
+WARNING:HDLCompiler:89 - "C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf" Line 162: <dacwrite> remains a black-box since it has no binding entity.
+Completed static elaboration
+WARNING:Simulator:648 - "C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf" Line 140. Instance wavreader is unbound
+WARNING:Simulator:648 - "C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf" Line 162. Instance dacwrite is unbound
+Compiling package standard
+Compiling package std_logic_1164
+Compiling package numeric_std
+Compiling package vcomponents
+Compiling architecture behavioral of entity SendSample [sendsample_default]
+Compiling architecture behavioral of entity main [main_default]
+Compiling architecture behavioral of entity main_main_sch_tb
+Time Resolution for simulation is 1ps.
+Waiting for 1 sub-compilation(s) to finish...
+Compiled 9 VHDL Units
+Built simulation executable C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main_main_sch_tb_isim_beh.exe
+Fuse Memory Usage: 49412 KB
+Fuse CPU Usage: 405 ms
