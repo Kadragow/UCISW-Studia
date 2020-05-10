@@ -7,11 +7,11 @@
 -- \   \   \/     Version : 14.7
 --  \   \         Application : sch2hdl
 --  /   /         Filename : main.vhf
--- /___/   /\     Timestamp : 05/08/2020 18:10:04
+-- /___/   /\     Timestamp : 05/10/2020 22:40:38
 -- \   \  /  \ 
 --  \___\/\___\ 
 --
---Command: sch2hdl -intstyle ise -family spartan3e -flat -suppress -vhdl C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf -w C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.sch
+--Command: sch2hdl -intstyle ise -family spartan3e -flat -suppress -vhdl G:/Programowanie/ucisw/UCISW-Studia/main.vhf -w G:/Programowanie/ucisw/UCISW-Studia/main.sch
 --Design Name: main
 --Device: spartan3e
 --Purpose:
@@ -29,6 +29,8 @@ entity main is
    port ( Abort       : in    std_logic; 
           Clk_50MHz   : in    std_logic; 
           FName       : in    std_logic_vector (7 downto 0); 
+          PS2_Clk     : in    std_logic; 
+          PS2_Data    : in    std_logic; 
           Reset       : in    std_logic; 
           SDC_MISO    : in    std_logic; 
           SPI_MISO    : in    std_logic; 
@@ -43,6 +45,8 @@ entity main is
           OUT_3       : out   std_logic; 
           OUT_4       : out   std_logic_vector (15 downto 0); 
           OUT_5       : out   std_logic_vector (2 downto 0); 
+          PS2_DO      : out   std_logic_vector (7 downto 0); 
+          PS2_Rdy     : out   std_logic; 
           SDC_MOSI    : out   std_logic; 
           SDC_SCK     : out   std_logic; 
           SDC_SS      : out   std_logic; 
@@ -122,6 +126,17 @@ architecture BEHAVIORAL of main is
              Clk_Sys     : in    std_logic);
    end component;
    
+   component PS2_Kbd
+      port ( PS2_Clk   : in    std_logic; 
+             PS2_Data  : in    std_logic; 
+             Clk_50MHz : in    std_logic; 
+             E0        : out   std_logic; 
+             F0        : out   std_logic; 
+             DO_Rdy    : out   std_logic; 
+             DO        : out   std_logic_vector (7 downto 0); 
+             Clk_Sys   : in    std_logic);
+   end component;
+   
 begin
    XLXI_1 : SendSample
       port map (Clk=>Clk_50MHz,
@@ -178,6 +193,16 @@ begin
                 SPI_MOSI=>SPI_MOSI,
                 SPI_SCK=>SPI_SCK,
                 SPI_SS_B=>SPI_SS_B);
+   
+   XLXI_4 : PS2_Kbd
+      port map (Clk_Sys=>Clk_50MHz,
+                Clk_50MHz=>Clk_50MHz,
+                PS2_Clk=>PS2_Clk,
+                PS2_Data=>PS2_Data,
+                DO(7 downto 0)=>PS2_DO(7 downto 0),
+                DO_Rdy=>PS2_Rdy,
+                E0=>open,
+                F0=>open);
    
 end BEHAVIORAL;
 

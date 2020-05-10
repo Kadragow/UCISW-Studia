@@ -40,12 +40,10 @@
         <signal name="AD_CONV" />
         <signal name="FPGA_INIT_B" />
         <signal name="SF_CE0" />
-        <signal name="XLXN_93" />
-        <signal name="XLXN_94" />
-        <signal name="XLXN_95" />
-        <signal name="XLXN_96" />
-        <signal name="XLXN_97" />
-        <signal name="XLXN_98" />
+        <signal name="PS2_Data" />
+        <signal name="PS2_Clk" />
+        <signal name="PS2_DO(7:0)" />
+        <signal name="PS2_Rdy" />
         <port polarity="Input" name="Clk_50MHz" />
         <port polarity="Input" name="Reset" />
         <port polarity="Input" name="SDC_MISO" />
@@ -70,6 +68,10 @@
         <port polarity="Output" name="AD_CONV" />
         <port polarity="Output" name="FPGA_INIT_B" />
         <port polarity="Output" name="SF_CE0" />
+        <port polarity="Input" name="PS2_Data" />
+        <port polarity="Input" name="PS2_Clk" />
+        <port polarity="Output" name="PS2_DO(7:0)" />
+        <port polarity="Output" name="PS2_Rdy" />
         <blockdef name="SendSample">
             <timestamp>2020-5-8T11:42:58</timestamp>
             <rect width="320" x="64" y="-448" height="448" />
@@ -145,6 +147,19 @@
             <line x2="0" y1="96" y2="96" x1="64" />
             <line x2="0" y1="160" y2="160" x1="64" />
         </blockdef>
+        <blockdef name="PS2_Kbd">
+            <timestamp>2008-9-19T9:9:36</timestamp>
+            <line x2="384" y1="-160" y2="-160" x1="320" />
+            <line x2="384" y1="-96" y2="-96" x1="320" />
+            <line x2="0" y1="-224" y2="-224" x1="64" />
+            <line x2="0" y1="-160" y2="-160" x1="64" />
+            <line x2="0" y1="-96" y2="-96" x1="64" />
+            <line x2="384" y1="-32" y2="-32" x1="320" />
+            <rect width="64" x="320" y="-236" height="24" />
+            <line x2="384" y1="-224" y2="-224" x1="320" />
+            <rect width="256" x="64" y="-256" height="256" />
+            <line x2="0" y1="-32" y2="-32" x1="64" />
+        </blockdef>
         <block symbolname="SendSample" name="XLXI_1">
             <blockpin signalname="XLXN_22" name="SampRdy" />
             <blockpin signalname="XLXN_13" name="SRate_Tick" />
@@ -201,15 +216,23 @@
             <blockpin signalname="Clk_50MHz" name="Clk_50MHz" />
             <blockpin signalname="Clk_50MHz" name="Clk_Sys" />
         </block>
+        <block symbolname="PS2_Kbd" name="XLXI_4">
+            <blockpin signalname="PS2_Clk" name="PS2_Clk" />
+            <blockpin signalname="PS2_Data" name="PS2_Data" />
+            <blockpin signalname="Clk_50MHz" name="Clk_50MHz" />
+            <blockpin name="E0" />
+            <blockpin name="F0" />
+            <blockpin signalname="PS2_Rdy" name="DO_Rdy" />
+            <blockpin signalname="PS2_DO(7:0)" name="DO(7:0)" />
+            <blockpin signalname="Clk_50MHz" name="Clk_Sys" />
+        </block>
     </netlist>
     <sheet sheetnum="1" width="3520" height="2720">
         <branch name="SDC_MISO">
-            <wire x2="1760" y1="896" y2="896" x1="1744" />
-            <wire x2="3296" y1="896" y2="896" x1="1760" />
+            <wire x2="3296" y1="896" y2="896" x1="1744" />
         </branch>
         <branch name="SDC_MOSI">
-            <wire x2="1760" y1="960" y2="960" x1="1744" />
-            <wire x2="3296" y1="960" y2="960" x1="1760" />
+            <wire x2="3296" y1="960" y2="960" x1="1744" />
         </branch>
         <branch name="XLXN_24(15:0)">
             <wire x2="1856" y1="1312" y2="1312" x1="1744" />
@@ -326,17 +349,20 @@
             <wire x2="2016" y1="1168" y2="1184" x1="2016" />
         </branch>
         <branch name="SDC_SS">
-            <wire x2="1760" y1="1088" y2="1088" x1="1744" />
-            <wire x2="3312" y1="1088" y2="1088" x1="1760" />
+            <wire x2="3312" y1="1088" y2="1088" x1="1744" />
         </branch>
         <branch name="SDC_SCK">
-            <wire x2="1760" y1="1024" y2="1024" x1="1744" />
-            <wire x2="3296" y1="1024" y2="1024" x1="1760" />
+            <wire x2="3296" y1="1024" y2="1024" x1="1744" />
         </branch>
         <branch name="Clk_50MHz">
-            <wire x2="1248" y1="2096" y2="2096" x1="192" />
+            <wire x2="304" y1="2096" y2="2096" x1="192" />
+            <wire x2="1248" y1="2096" y2="2096" x1="304" />
             <wire x2="1968" y1="2096" y2="2096" x1="1248" />
             <wire x2="2576" y1="2096" y2="2096" x1="1968" />
+            <wire x2="384" y1="1712" y2="1712" x1="304" />
+            <wire x2="304" y1="1712" y2="1776" x1="304" />
+            <wire x2="304" y1="1776" y2="2096" x1="304" />
+            <wire x2="384" y1="1776" y2="1776" x1="304" />
             <wire x2="1312" y1="1664" y2="1664" x1="1248" />
             <wire x2="1248" y1="1664" y2="1728" x1="1248" />
             <wire x2="1312" y1="1728" y2="1728" x1="1248" />
@@ -392,5 +418,23 @@
         <iomarker fontsize="28" x="3296" y="1024" name="SDC_SCK" orien="R0" />
         <iomarker fontsize="28" x="128" y="2160" name="Reset" orien="R180" />
         <iomarker fontsize="28" x="192" y="2096" name="Clk_50MHz" orien="R180" />
+        <instance x="384" y="1808" name="XLXI_4" orien="R0">
+        </instance>
+        <branch name="PS2_Data">
+            <wire x2="384" y1="1648" y2="1648" x1="352" />
+        </branch>
+        <iomarker fontsize="28" x="352" y="1648" name="PS2_Data" orien="R180" />
+        <branch name="PS2_Clk">
+            <wire x2="384" y1="1584" y2="1584" x1="352" />
+        </branch>
+        <iomarker fontsize="28" x="352" y="1584" name="PS2_Clk" orien="R180" />
+        <branch name="PS2_DO(7:0)">
+            <wire x2="800" y1="1584" y2="1584" x1="768" />
+        </branch>
+        <iomarker fontsize="28" x="800" y="1584" name="PS2_DO(7:0)" orien="R0" />
+        <branch name="PS2_Rdy">
+            <wire x2="800" y1="1776" y2="1776" x1="768" />
+        </branch>
+        <iomarker fontsize="28" x="800" y="1776" name="PS2_Rdy" orien="R0" />
     </sheet>
 </drawing>

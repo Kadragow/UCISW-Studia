@@ -1,3 +1,0 @@
-select figure at 524 1582 8 -branches -sn=1
-select figure at 729 1582 8 -branches -sn=1
-select all in 729 1582 802 1724 -branches -enclosed -sn=1

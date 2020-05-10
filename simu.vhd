@@ -23,7 +23,11 @@ ARCHITECTURE behavioral OF main_main_sch_tb IS
 
    COMPONENT main
    PORT( Clk_50MHz	:	IN	STD_LOGIC; 
-          Reset	:	IN	STD_LOGIC; 
+          PS2_Clk	:	IN STD_LOGIC;
+			 PS2_Data	:	IN STD_LOGIC;
+			 PS2_DO	:	OUT STD_LOGIC_VECTOR (7 downto 0);
+			 PS2_Rdy	:	OUT STD_LOGIC;
+			 Reset	:	IN	STD_LOGIC; 
           SDC_MISO	:	IN	STD_LOGIC; 
           SDC_MOSI	:	OUT	STD_LOGIC; 
           SDC_SCK	:	OUT	STD_LOGIC; 
@@ -48,7 +52,14 @@ ARCHITECTURE behavioral OF main_main_sch_tb IS
           SF_CE0	:	OUT	STD_LOGIC);
    END COMPONENT;
 
-   SIGNAL Clk_50MHz	:	STD_LOGIC;
+   SIGNAL PS2_Clk	:	STD_LOGIC;
+	SIGNAL PS2_Data	:	STD_LOGIC;
+	SIGNAL PS2_DO	:	STD_LOGIC_VECTOR (7 downto 0);
+	SIGNAL clk_counter	:	integer range 0 to 3000 := 0;
+	SIGNAL bits_counter	:	integer range 0 to 11 :=0;
+	SIGNAL bits	:	STD_LOGIC_VECTOR (0 to 10) := "00010101001";
+	SIGNAL PS2_Rdy	:	STD_LOGIC;
+	SIGNAL Clk_50MHz	:	STD_LOGIC;
    SIGNAL Reset	:	STD_LOGIC;
    SIGNAL SDC_MISO	:	STD_LOGIC;
    SIGNAL SDC_MOSI	:	STD_LOGIC;
@@ -76,6 +87,10 @@ ARCHITECTURE behavioral OF main_main_sch_tb IS
 BEGIN
 
    UUT: main PORT MAP(
+		PS2_Clk => PS2_Clk,
+		PS2_Data => PS2_Data,
+		PS2_DO => PS2_DO,
+		PS2_Rdy => PS2_Rdy,
 		Clk_50MHz => Clk_50MHz, 
 		Reset => Reset, 
 		SDC_MISO => SDC_MISO, 
@@ -120,12 +135,30 @@ BEGIN
 
    tb : PROCESS
    BEGIN
-
-		
+		PS2_Data <= bits(bits_counter);
+		FName <= "00000001";
       Clk_50MHz <= '0';
 		wait for 10ns;
 		Clk_50Mhz <= '1';
-		wait for 10ns;		
+		wait for 10ns;
+		if(clk_counter<1500) then
+			PS2_Clk <= '0';
+		else
+			PS2_Clk <= '1';
+		end if;
+		if(clk_counter<3000) then
+			clk_counter <= clk_counter+1;
+		else
+			if(bits_counter<10) then
+				PS2_Data <= bits(bits_counter);
+				bits_counter <= bits_counter+1;
+			else
+				bits_counter <= 0;
+			end if;
+			clk_counter <= 0;
+		end if;
+		-- 0 0010 1010 0 1 -- sygna³ PS2_data dla znaku "v": 1 bit startowy, 8 bitów znaku, 1 bit parzystoœci (odd parity), 1 bit stopu
+		
 		
    END PROCESS;
 -- *** End Test Bench - User Defined Section ***
