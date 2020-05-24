@@ -5,16 +5,22 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
-<msg type="warning" file="HDLCompiler" num="89" delta="unknown" >"C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf" Line 140: &lt;<arg fmt="%s" index="1">wavreader</arg>&gt; remains a black-box since it has no binding entity.
+<msg type="warning" file="HDLCompiler" num="89" delta="unknown" >"C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf" Line 167: &lt;<arg fmt="%s" index="1">wavreader</arg>&gt; remains a black-box since it has no binding entity.
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="89" delta="unknown" >"C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf" Line 162: &lt;<arg fmt="%s" index="1">dacwrite</arg>&gt; remains a black-box since it has no binding entity.
+<msg type="warning" file="HDLCompiler" num="89" delta="unknown" >"C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf" Line 189: &lt;<arg fmt="%s" index="1">dacwrite</arg>&gt; remains a black-box since it has no binding entity.
 </msg>
 
-<msg type="warning" file="Simulator" num="648" delta="unknown" >&quot;<arg fmt="%s" index="1">C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf</arg>&quot; Line <arg fmt="%d" index="2">140</arg>. Instance <arg fmt="%s" index="3">wavreader</arg> is unbound
+<msg type="warning" file="HDLCompiler" num="89" delta="unknown" >"C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf" Line 209: &lt;<arg fmt="%s" index="1">ps2_kbd</arg>&gt; remains a black-box since it has no binding entity.
 </msg>
 
-<msg type="warning" file="Simulator" num="648" delta="unknown" >&quot;<arg fmt="%s" index="1">C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf</arg>&quot; Line <arg fmt="%d" index="2">162</arg>. Instance <arg fmt="%s" index="3">dacwrite</arg> is unbound
+<msg type="warning" file="Simulator" num="648" delta="unknown" >&quot;<arg fmt="%s" index="1">C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf</arg>&quot; Line <arg fmt="%d" index="2">167</arg>. Instance <arg fmt="%s" index="3">wavreader</arg> is unbound
+</msg>
+
+<msg type="warning" file="Simulator" num="648" delta="unknown" >&quot;<arg fmt="%s" index="1">C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf</arg>&quot; Line <arg fmt="%d" index="2">189</arg>. Instance <arg fmt="%s" index="3">dacwrite</arg> is unbound
+</msg>
+
+<msg type="warning" file="Simulator" num="648" delta="unknown" >&quot;<arg fmt="%s" index="1">C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf</arg>&quot; Line <arg fmt="%d" index="2">209</arg>. Instance <arg fmt="%s" index="3">ps2_kbd</arg> is unbound
 </msg>
 
 </messages>

@@ -49,7 +49,19 @@ ARCHITECTURE behavioral OF main_main_sch_tb IS
           AMP_CS	:	OUT	STD_LOGIC; 
           AD_CONV	:	OUT	STD_LOGIC; 
           FPGA_INIT_B	:	OUT	STD_LOGIC; 
-          SF_CE0	:	OUT	STD_LOGIC);
+          SF_CE0	:	OUT	STD_LOGIC;
+			 SampRdyTest : IN STD_LOGIC;			 
+			 SrateTickTest : IN STD_LOGIC;
+			 DWrBusyTest : IN STD_LOGIC;
+			 ResetTest : IN STD_LOGIC;
+			 ClkTest : IN STD_LOGIC;
+			 SampLTest	:	IN STD_LOGIC_VECTOR (15 downto 0);
+			 SampRTest	:	IN STD_LOGIC_VECTOR (15 downto 0);
+			 DWrStartTest	:	OUT	STD_LOGIC; 
+			 SampPopTest	:	OUT	STD_LOGIC; 
+			 DWrCmdTest	:	OUT	STD_LOGIC_VECTOR (3 DOWNTO 0);
+			 DWrAdrTest	:	OUT	STD_LOGIC_VECTOR (3 DOWNTO 0);
+			 DataTest	:	OUT	STD_LOGIC_VECTOR (11 DOWNTO 0));
    END COMPONENT;
 
    SIGNAL PS2_Clk	:	STD_LOGIC;
@@ -57,7 +69,7 @@ ARCHITECTURE behavioral OF main_main_sch_tb IS
 	SIGNAL PS2_DO	:	STD_LOGIC_VECTOR (7 downto 0);
 	SIGNAL clk_counter	:	integer range 0 to 3000 := 0;
 	SIGNAL bits_counter	:	integer range 0 to 11 :=0;
-	SIGNAL bits	:	STD_LOGIC_VECTOR (0 to 10) := "00010101001";
+	SIGNAL bits	:	STD_LOGIC_VECTOR (0 to 10) := "00010101001"; 
 	SIGNAL PS2_Rdy	:	STD_LOGIC;
 	SIGNAL Clk_50MHz	:	STD_LOGIC;
    SIGNAL Reset	:	STD_LOGIC;
@@ -83,6 +95,19 @@ ARCHITECTURE behavioral OF main_main_sch_tb IS
    SIGNAL AD_CONV	:	STD_LOGIC;
    SIGNAL FPGA_INIT_B	:	STD_LOGIC;
    SIGNAL SF_CE0	:	STD_LOGIC;
+	--Test
+	SIGNAL SampRdyTest : STD_LOGIC;
+	SIGNAL SrateTickTest : STD_LOGIC;
+	SIGNAL DWrBusyTest : STD_LOGIC;
+	SIGNAL ResetTest : STD_LOGIC;
+	SIGNAL ClkTest : STD_LOGIC;
+	SIGNAL SampLTest	: STD_LOGIC_VECTOR (15 downto 0);
+	SIGNAL SampRTest	: STD_LOGIC_VECTOR (15 downto 0);
+	SIGNAL DWrStartTest	: STD_LOGIC; 
+	SIGNAL SampPopTest	:	STD_LOGIC; 
+	SIGNAL DWrCmdTest	:	STD_LOGIC_VECTOR (3 DOWNTO 0);
+	SIGNAL DWrAdrTest	:	STD_LOGIC_VECTOR (3 DOWNTO 0);
+	SIGNAL DataTest :	STD_LOGIC_VECTOR (11 DOWNTO 0);
 
 BEGIN
 
@@ -114,7 +139,20 @@ BEGIN
 		AMP_CS => AMP_CS, 
 		AD_CONV => AD_CONV, 
 		FPGA_INIT_B => FPGA_INIT_B, 
-		SF_CE0 => SF_CE0
+		SF_CE0 => SF_CE0,
+		SampRdyTest => SampRdyTest,
+		SrateTickTest => SrateTickTest,
+		DWrBusyTest => DWrBusyTest,
+		ResetTest => ResetTest, 
+		ClkTest => ClkTest,
+		SampLTest => SampLTest,
+		SampRTest => SampRTest,
+		DWrStartTest => DWrStartTest,
+		SampPopTest	=> SampPopTest,
+		DWrCmdTest => DWrCmdTest,	
+		DWrAdrTest => DWrAdrTest,
+		DataTest => DataTest
+		
    );
 
 -- *** Test Bench - User Defined Section ***
@@ -132,14 +170,28 @@ BEGIN
 	
 	END PROCESS;
 	
+	tb_tests : PROCESS
+	BEGIN
+		ResetTest <= '0';
+		SampRdyTest <= '1';
+		SrateTickTest <= '1';
+		DWrBusyTest <= '0';
+		SampRTest <= "0101010101010101";
+		SampLTest <= "1010101010101010";
+		wait;
+		
+	END PROCESS;
+	
 
    tb : PROCESS
    BEGIN
 		PS2_Data <= bits(bits_counter);
 		FName <= "00000001";
       Clk_50MHz <= '0';
+		ClkTest <= '0';
 		wait for 10ns;
 		Clk_50Mhz <= '1';
+		ClkTest <= '1';
 		wait for 10ns;
 		if(clk_counter<1500) then
 			PS2_Clk <= '0';

@@ -1,1 +1,1 @@
--intstyle "ise" -incremental -o "C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main_main_sch_tb_isim_beh.exe" -prj "C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main_main_sch_tb_beh.prj" "main_main_sch_tb" 
+-intstyle "ise" -incremental -o "C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main_main_sch_tb_isim_beh.exe" -prj "C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main_main_sch_tb_beh.prj" "work.main_main_sch_tb" 

@@ -44,6 +44,18 @@
         <signal name="PS2_Clk" />
         <signal name="PS2_DO(7:0)" />
         <signal name="PS2_Rdy" />
+        <signal name="SampRdyTest" />
+        <signal name="SrateTickTest" />
+        <signal name="DWrBusyTest" />
+        <signal name="ResetTest" />
+        <signal name="ClkTest" />
+        <signal name="SampLTest(15:0)" />
+        <signal name="SampRTest(15:0)" />
+        <signal name="DWrStartTest" />
+        <signal name="SampPopTest" />
+        <signal name="DWrCmdTest(3:0)" />
+        <signal name="DWrAdrTest(3:0)" />
+        <signal name="DataTest(11:0)" />
         <port polarity="Input" name="Clk_50MHz" />
         <port polarity="Input" name="Reset" />
         <port polarity="Input" name="SDC_MISO" />
@@ -72,6 +84,18 @@
         <port polarity="Input" name="PS2_Clk" />
         <port polarity="Output" name="PS2_DO(7:0)" />
         <port polarity="Output" name="PS2_Rdy" />
+        <port polarity="Input" name="SampRdyTest" />
+        <port polarity="Input" name="SrateTickTest" />
+        <port polarity="Input" name="DWrBusyTest" />
+        <port polarity="Input" name="ResetTest" />
+        <port polarity="Input" name="ClkTest" />
+        <port polarity="Input" name="SampLTest(15:0)" />
+        <port polarity="Input" name="SampRTest(15:0)" />
+        <port polarity="Output" name="DWrStartTest" />
+        <port polarity="Output" name="SampPopTest" />
+        <port polarity="Output" name="DWrCmdTest(3:0)" />
+        <port polarity="Output" name="DWrAdrTest(3:0)" />
+        <port polarity="Output" name="DataTest(11:0)" />
         <blockdef name="SendSample">
             <timestamp>2020-5-8T11:42:58</timestamp>
             <rect width="320" x="64" y="-448" height="448" />
@@ -225,6 +249,20 @@
             <blockpin signalname="PS2_Rdy" name="DO_Rdy" />
             <blockpin signalname="PS2_DO(7:0)" name="DO(7:0)" />
             <blockpin signalname="Clk_50MHz" name="Clk_Sys" />
+        </block>
+        <block symbolname="SendSample" name="XLXI_5">
+            <blockpin signalname="SampRdyTest" name="SampRdy" />
+            <blockpin signalname="SrateTickTest" name="SRate_Tick" />
+            <blockpin signalname="DWrBusyTest" name="DWr_Busy" />
+            <blockpin signalname="ResetTest" name="Reset" />
+            <blockpin signalname="ClkTest" name="Clk" />
+            <blockpin signalname="SampLTest(15:0)" name="SampL(15:0)" />
+            <blockpin signalname="SampRTest(15:0)" name="SampR(15:0)" />
+            <blockpin signalname="DWrStartTest" name="DWr_Start" />
+            <blockpin signalname="SampPopTest" name="Samp_Pop" />
+            <blockpin signalname="DWrCmdTest(3:0)" name="DWr_Cmd(3:0)" />
+            <blockpin signalname="DWrAdrTest(3:0)" name="DWr_Adr(3:0)" />
+            <blockpin signalname="DataTest(11:0)" name="DWr_Data(11:0)" />
         </block>
     </netlist>
     <sheet sheetnum="1" width="3520" height="2720">
@@ -436,5 +474,67 @@
             <wire x2="800" y1="1776" y2="1776" x1="768" />
         </branch>
         <iomarker fontsize="28" x="800" y="1776" name="PS2_Rdy" orien="R0" />
+        <instance x="1024" y="560" name="XLXI_5" orien="R0">
+        </instance>
+        <branch name="SampRdyTest">
+            <wire x2="1008" y1="144" y2="144" x1="992" />
+            <wire x2="1024" y1="144" y2="144" x1="1008" />
+        </branch>
+        <iomarker fontsize="28" x="992" y="144" name="SampRdyTest" orien="R180" />
+        <branch name="SrateTickTest">
+            <wire x2="1008" y1="208" y2="208" x1="992" />
+            <wire x2="1024" y1="208" y2="208" x1="1008" />
+        </branch>
+        <iomarker fontsize="28" x="992" y="208" name="SrateTickTest" orien="R180" />
+        <branch name="DWrBusyTest">
+            <wire x2="1008" y1="272" y2="272" x1="992" />
+            <wire x2="1024" y1="272" y2="272" x1="1008" />
+        </branch>
+        <iomarker fontsize="28" x="992" y="272" name="DWrBusyTest" orien="R180" />
+        <branch name="ResetTest">
+            <wire x2="1008" y1="336" y2="336" x1="992" />
+            <wire x2="1024" y1="336" y2="336" x1="1008" />
+        </branch>
+        <iomarker fontsize="28" x="992" y="336" name="ResetTest" orien="R180" />
+        <branch name="ClkTest">
+            <wire x2="1008" y1="400" y2="400" x1="992" />
+            <wire x2="1024" y1="400" y2="400" x1="1008" />
+        </branch>
+        <iomarker fontsize="28" x="992" y="400" name="ClkTest" orien="R180" />
+        <branch name="SampLTest(15:0)">
+            <wire x2="1008" y1="464" y2="464" x1="992" />
+            <wire x2="1024" y1="464" y2="464" x1="1008" />
+        </branch>
+        <iomarker fontsize="28" x="992" y="464" name="SampLTest(15:0)" orien="R180" />
+        <branch name="SampRTest(15:0)">
+            <wire x2="1008" y1="528" y2="528" x1="992" />
+            <wire x2="1024" y1="528" y2="528" x1="1008" />
+        </branch>
+        <iomarker fontsize="28" x="992" y="528" name="SampRTest(15:0)" orien="R180" />
+        <branch name="DWrStartTest">
+            <wire x2="1488" y1="144" y2="144" x1="1472" />
+            <wire x2="1504" y1="144" y2="144" x1="1488" />
+        </branch>
+        <iomarker fontsize="28" x="1504" y="144" name="DWrStartTest" orien="R0" />
+        <branch name="SampPopTest">
+            <wire x2="1488" y1="240" y2="240" x1="1472" />
+            <wire x2="1504" y1="240" y2="240" x1="1488" />
+        </branch>
+        <iomarker fontsize="28" x="1504" y="240" name="SampPopTest" orien="R0" />
+        <branch name="DWrCmdTest(3:0)">
+            <wire x2="1488" y1="336" y2="336" x1="1472" />
+            <wire x2="1504" y1="336" y2="336" x1="1488" />
+        </branch>
+        <iomarker fontsize="28" x="1504" y="336" name="DWrCmdTest(3:0)" orien="R0" />
+        <branch name="DWrAdrTest(3:0)">
+            <wire x2="1488" y1="432" y2="432" x1="1472" />
+            <wire x2="1504" y1="432" y2="432" x1="1488" />
+        </branch>
+        <iomarker fontsize="28" x="1504" y="432" name="DWrAdrTest(3:0)" orien="R0" />
+        <branch name="DataTest(11:0)">
+            <wire x2="1488" y1="528" y2="528" x1="1472" />
+            <wire x2="1504" y1="528" y2="528" x1="1488" />
+        </branch>
+        <iomarker fontsize="28" x="1504" y="528" name="DataTest(11:0)" orien="R0" />
     </sheet>
 </drawing>

@@ -7,11 +7,11 @@
 -- \   \   \/     Version : 14.7
 --  \   \         Application : sch2hdl
 --  /   /         Filename : main.vhf
--- /___/   /\     Timestamp : 05/10/2020 22:40:38
+-- /___/   /\     Timestamp : 05/24/2020 13:34:09
 -- \   \  /  \ 
 --  \___\/\___\ 
 --
---Command: sch2hdl -intstyle ise -family spartan3e -flat -suppress -vhdl G:/Programowanie/ucisw/UCISW-Studia/main.vhf -w G:/Programowanie/ucisw/UCISW-Studia/main.sch
+--Command: sch2hdl -intstyle ise -family spartan3e -flat -suppress -vhdl C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf -w C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.sch
 --Design Name: main
 --Device: spartan3e
 --Purpose:
@@ -26,47 +26,59 @@ library UNISIM;
 use UNISIM.Vcomponents.ALL;
 
 entity main is
-   port ( Abort       : in    std_logic; 
-          Clk_50MHz   : in    std_logic; 
-          FName       : in    std_logic_vector (7 downto 0); 
-          PS2_Clk     : in    std_logic; 
-          PS2_Data    : in    std_logic; 
-          Reset       : in    std_logic; 
-          SDC_MISO    : in    std_logic; 
-          SPI_MISO    : in    std_logic; 
-          Start       : in    std_logic; 
-          AD_CONV     : out   std_logic; 
-          AMP_CS      : out   std_logic; 
-          DAC_CLR     : out   std_logic; 
-          DAC_CS      : out   std_logic; 
-          FPGA_INIT_B : out   std_logic; 
-          OUT_1       : out   std_logic; 
-          OUT_2       : out   std_logic; 
-          OUT_3       : out   std_logic; 
-          OUT_4       : out   std_logic_vector (15 downto 0); 
-          OUT_5       : out   std_logic_vector (2 downto 0); 
-          PS2_DO      : out   std_logic_vector (7 downto 0); 
-          PS2_Rdy     : out   std_logic; 
-          SDC_MOSI    : out   std_logic; 
-          SDC_SCK     : out   std_logic; 
-          SDC_SS      : out   std_logic; 
-          SF_CE0      : out   std_logic; 
-          SPI_MOSI    : out   std_logic; 
-          SPI_SCK     : out   std_logic; 
-          SPI_SS_B    : out   std_logic);
+   port ( Abort         : in    std_logic; 
+          ClkTest       : in    std_logic; 
+          Clk_50MHz     : in    std_logic; 
+          DWrBusyTest   : in    std_logic; 
+          FName         : in    std_logic_vector (7 downto 0); 
+          PS2_Clk       : in    std_logic; 
+          PS2_Data      : in    std_logic; 
+          Reset         : in    std_logic; 
+          ResetTest     : in    std_logic; 
+          SampLTest     : in    std_logic_vector (15 downto 0); 
+          SampRdyTest   : in    std_logic; 
+          SampRTest     : in    std_logic_vector (15 downto 0); 
+          SDC_MISO      : in    std_logic; 
+          SPI_MISO      : in    std_logic; 
+          SrateTickTest : in    std_logic; 
+          Start         : in    std_logic; 
+          AD_CONV       : out   std_logic; 
+          AMP_CS        : out   std_logic; 
+          DAC_CLR       : out   std_logic; 
+          DAC_CS        : out   std_logic; 
+          DataTest      : out   std_logic_vector (11 downto 0); 
+          DWrAdrTest    : out   std_logic_vector (3 downto 0); 
+          DWrCmdTest    : out   std_logic_vector (3 downto 0); 
+          DWrStartTest  : out   std_logic; 
+          FPGA_INIT_B   : out   std_logic; 
+          OUT_1         : out   std_logic; 
+          OUT_2         : out   std_logic; 
+          OUT_3         : out   std_logic; 
+          OUT_4         : out   std_logic_vector (15 downto 0); 
+          OUT_5         : out   std_logic_vector (2 downto 0); 
+          PS2_DO        : out   std_logic_vector (7 downto 0); 
+          PS2_Rdy       : out   std_logic; 
+          SampPopTest   : out   std_logic; 
+          SDC_MOSI      : out   std_logic; 
+          SDC_SCK       : out   std_logic; 
+          SDC_SS        : out   std_logic; 
+          SF_CE0        : out   std_logic; 
+          SPI_MOSI      : out   std_logic; 
+          SPI_SCK       : out   std_logic; 
+          SPI_SS_B      : out   std_logic);
 end main;
 
 architecture BEHAVIORAL of main is
-   signal XLXN_13     : std_logic;
-   signal XLXN_14     : std_logic;
-   signal XLXN_17     : std_logic;
-   signal XLXN_22     : std_logic;
-   signal XLXN_23     : std_logic_vector (15 downto 0);
-   signal XLXN_24     : std_logic_vector (15 downto 0);
-   signal XLXN_30     : std_logic;
-   signal XLXN_31     : std_logic_vector (3 downto 0);
-   signal XLXN_32     : std_logic_vector (3 downto 0);
-   signal XLXN_33     : std_logic_vector (11 downto 0);
+   signal XLXN_13       : std_logic;
+   signal XLXN_14       : std_logic;
+   signal XLXN_17       : std_logic;
+   signal XLXN_22       : std_logic;
+   signal XLXN_23       : std_logic_vector (15 downto 0);
+   signal XLXN_24       : std_logic_vector (15 downto 0);
+   signal XLXN_30       : std_logic;
+   signal XLXN_31       : std_logic_vector (3 downto 0);
+   signal XLXN_32       : std_logic_vector (3 downto 0);
+   signal XLXN_33       : std_logic_vector (11 downto 0);
    component SendSample
       port ( SampRdy    : in    std_logic; 
              SRate_Tick : in    std_logic; 
@@ -203,6 +215,20 @@ begin
                 DO_Rdy=>PS2_Rdy,
                 E0=>open,
                 F0=>open);
+   
+   XLXI_5 : SendSample
+      port map (Clk=>ClkTest,
+                DWr_Busy=>DWrBusyTest,
+                Reset=>ResetTest,
+                SampL(15 downto 0)=>SampLTest(15 downto 0),
+                SampR(15 downto 0)=>SampRTest(15 downto 0),
+                SampRdy=>SampRdyTest,
+                SRate_Tick=>SrateTickTest,
+                DWr_Adr(3 downto 0)=>DWrAdrTest(3 downto 0),
+                DWr_Cmd(3 downto 0)=>DWrCmdTest(3 downto 0),
+                DWr_Data(11 downto 0)=>DataTest(11 downto 0),
+                DWr_Start=>DWrStartTest,
+                Samp_Pop=>SampPopTest);
    
 end BEHAVIORAL;
 
