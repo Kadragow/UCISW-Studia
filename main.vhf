@@ -7,11 +7,11 @@
 -- \   \   \/     Version : 14.7
 --  \   \         Application : sch2hdl
 --  /   /         Filename : main.vhf
--- /___/   /\     Timestamp : 05/24/2020 13:34:09
+-- /___/   /\     Timestamp : 06/08/2020 17:35:56
 -- \   \  /  \ 
 --  \___\/\___\ 
 --
---Command: sch2hdl -intstyle ise -family spartan3e -flat -suppress -vhdl C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.vhf -w C:/Users/Kamil/Desktop/ucisw/ucisw_projekt/main.sch
+--Command: sch2hdl -intstyle ise -family spartan3e -flat -suppress -vhdl G:/Programowanie/ucisw/UCISW-Studia/main.vhf -w G:/Programowanie/ucisw/UCISW-Studia/main.sch
 --Design Name: main
 --Device: spartan3e
 --Purpose:
@@ -25,12 +25,29 @@ use ieee.numeric_std.ALL;
 library UNISIM;
 use UNISIM.Vcomponents.ALL;
 
+entity Kbd_to_ASCII_MUSER_main is
+   port ( );
+end Kbd_to_ASCII_MUSER_main;
+
+architecture BEHAVIORAL of Kbd_to_ASCII_MUSER_main is
+begin
+end BEHAVIORAL;
+
+
+
+library ieee;
+use ieee.std_logic_1164.ALL;
+use ieee.numeric_std.ALL;
+library UNISIM;
+use UNISIM.Vcomponents.ALL;
+
 entity main is
    port ( Abort         : in    std_logic; 
           ClkTest       : in    std_logic; 
           Clk_50MHz     : in    std_logic; 
+          DataIN        : in    std_logic_vector (7 downto 0); 
+          DataRdy       : in    std_logic; 
           DWrBusyTest   : in    std_logic; 
-          FName         : in    std_logic_vector (7 downto 0); 
           PS2_Clk       : in    std_logic; 
           PS2_Data      : in    std_logic; 
           Reset         : in    std_logic; 
@@ -46,6 +63,7 @@ entity main is
           AMP_CS        : out   std_logic; 
           DAC_CLR       : out   std_logic; 
           DAC_CS        : out   std_logic; 
+          DataOUT       : out   std_logic_vector (7 downto 0); 
           DataTest      : out   std_logic_vector (11 downto 0); 
           DWrAdrTest    : out   std_logic_vector (3 downto 0); 
           DWrCmdTest    : out   std_logic_vector (3 downto 0); 
@@ -56,8 +74,6 @@ entity main is
           OUT_3         : out   std_logic; 
           OUT_4         : out   std_logic_vector (15 downto 0); 
           OUT_5         : out   std_logic_vector (2 downto 0); 
-          PS2_DO        : out   std_logic_vector (7 downto 0); 
-          PS2_Rdy       : out   std_logic; 
           SampPopTest   : out   std_logic; 
           SDC_MOSI      : out   std_logic; 
           SDC_SCK       : out   std_logic; 
@@ -79,6 +95,9 @@ architecture BEHAVIORAL of main is
    signal XLXN_31       : std_logic_vector (3 downto 0);
    signal XLXN_32       : std_logic_vector (3 downto 0);
    signal XLXN_33       : std_logic_vector (11 downto 0);
+   signal XLXN_34       : std_logic_vector (7 downto 0);
+   signal XLXN_49       : std_logic_vector (7 downto 0);
+   signal XLXN_50       : std_logic;
    component SendSample
       port ( SampRdy    : in    std_logic; 
              SRate_Tick : in    std_logic; 
@@ -149,6 +168,12 @@ architecture BEHAVIORAL of main is
              Clk_Sys   : in    std_logic);
    end component;
    
+   component Kbd_to_ASCII_MUSER_main
+      port ( DataRdy : in    std_logic; 
+             DataIN  : in    std_logic_vector (7 downto 0); 
+             DataOUT : out   std_logic_vector (7 downto 0));
+   end component;
+   
 begin
    XLXI_1 : SendSample
       port map (Clk=>Clk_50MHz,
@@ -169,7 +194,7 @@ begin
                 Clk_Sys=>Clk_50MHz,
                 Clk_50MHz=>Clk_50MHz,
                 DO_Pop=>XLXN_17,
-                FName(7 downto 0)=>FName(7 downto 0),
+                FName(7 downto 0)=>XLXN_34(7 downto 0),
                 Reset=>Reset,
                 SDC_MISO=>SDC_MISO,
                 Start=>Start,
@@ -211,8 +236,8 @@ begin
                 Clk_50MHz=>Clk_50MHz,
                 PS2_Clk=>PS2_Clk,
                 PS2_Data=>PS2_Data,
-                DO(7 downto 0)=>PS2_DO(7 downto 0),
-                DO_Rdy=>PS2_Rdy,
+                DO(7 downto 0)=>XLXN_49(7 downto 0),
+                DO_Rdy=>XLXN_50,
                 E0=>open,
                 F0=>open);
    
@@ -229,6 +254,16 @@ begin
                 DWr_Data(11 downto 0)=>DataTest(11 downto 0),
                 DWr_Start=>DWrStartTest,
                 Samp_Pop=>SampPopTest);
+   
+   XLXI_6 : Kbd_to_ASCII_MUSER_main
+      port map (DataIN(7 downto 0)=>XLXN_49(7 downto 0),
+                DataRdy=>XLXN_50,
+                DataOUT(7 downto 0)=>XLXN_34(7 downto 0));
+   
+   XLXI_7 : Kbd_to_ASCII_MUSER_main
+      port map (DataIN(7 downto 0)=>DataIN(7 downto 0),
+                DataRdy=>DataRdy,
+                DataOUT(7 downto 0)=>DataOUT(7 downto 0));
    
 end BEHAVIORAL;
 

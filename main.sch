@@ -27,7 +27,6 @@
         <signal name="XLXN_31(3:0)" />
         <signal name="XLXN_32(3:0)" />
         <signal name="XLXN_33(11:0)" />
-        <signal name="FName(7:0)" />
         <signal name="Start" />
         <signal name="Abort" />
         <signal name="SPI_MISO" />
@@ -40,10 +39,6 @@
         <signal name="AD_CONV" />
         <signal name="FPGA_INIT_B" />
         <signal name="SF_CE0" />
-        <signal name="PS2_Data" />
-        <signal name="PS2_Clk" />
-        <signal name="PS2_DO(7:0)" />
-        <signal name="PS2_Rdy" />
         <signal name="SampRdyTest" />
         <signal name="SrateTickTest" />
         <signal name="DWrBusyTest" />
@@ -56,6 +51,14 @@
         <signal name="DWrCmdTest(3:0)" />
         <signal name="DWrAdrTest(3:0)" />
         <signal name="DataTest(11:0)" />
+        <signal name="XLXN_34(7:0)" />
+        <signal name="PS2_Data" />
+        <signal name="PS2_Clk" />
+        <signal name="XLXN_49(7:0)" />
+        <signal name="XLXN_50" />
+        <signal name="DataOUT(7:0)" />
+        <signal name="DataRdy" />
+        <signal name="DataIN(7:0)" />
         <port polarity="Input" name="Clk_50MHz" />
         <port polarity="Input" name="Reset" />
         <port polarity="Input" name="SDC_MISO" />
@@ -67,7 +70,6 @@
         <port polarity="Output" name="OUT_3" />
         <port polarity="Output" name="OUT_4(15:0)" />
         <port polarity="Output" name="OUT_5(2:0)" />
-        <port polarity="Input" name="FName(7:0)" />
         <port polarity="Input" name="Start" />
         <port polarity="Input" name="Abort" />
         <port polarity="Input" name="SPI_MISO" />
@@ -80,10 +82,6 @@
         <port polarity="Output" name="AD_CONV" />
         <port polarity="Output" name="FPGA_INIT_B" />
         <port polarity="Output" name="SF_CE0" />
-        <port polarity="Input" name="PS2_Data" />
-        <port polarity="Input" name="PS2_Clk" />
-        <port polarity="Output" name="PS2_DO(7:0)" />
-        <port polarity="Output" name="PS2_Rdy" />
         <port polarity="Input" name="SampRdyTest" />
         <port polarity="Input" name="SrateTickTest" />
         <port polarity="Input" name="DWrBusyTest" />
@@ -96,6 +94,11 @@
         <port polarity="Output" name="DWrCmdTest(3:0)" />
         <port polarity="Output" name="DWrAdrTest(3:0)" />
         <port polarity="Output" name="DataTest(11:0)" />
+        <port polarity="Input" name="PS2_Data" />
+        <port polarity="Input" name="PS2_Clk" />
+        <port polarity="Output" name="DataOUT(7:0)" />
+        <port polarity="Input" name="DataRdy" />
+        <port polarity="Input" name="DataIN(7:0)" />
         <blockdef name="SendSample">
             <timestamp>2020-5-8T11:42:58</timestamp>
             <rect width="320" x="64" y="-448" height="448" />
@@ -184,6 +187,15 @@
             <rect width="256" x="64" y="-256" height="256" />
             <line x2="0" y1="-32" y2="-32" x1="64" />
         </blockdef>
+        <blockdef name="Kbd_to_ASCII">
+            <timestamp>2020-6-7T21:48:58</timestamp>
+            <rect width="256" x="64" y="-128" height="128" />
+            <line x2="0" y1="-96" y2="-96" x1="64" />
+            <rect width="64" x="0" y="-44" height="24" />
+            <line x2="0" y1="-32" y2="-32" x1="64" />
+            <rect width="64" x="320" y="-108" height="24" />
+            <line x2="384" y1="-96" y2="-96" x1="320" />
+        </blockdef>
         <block symbolname="SendSample" name="XLXI_1">
             <blockpin signalname="XLXN_22" name="SampRdy" />
             <blockpin signalname="XLXN_13" name="SRate_Tick" />
@@ -199,7 +211,7 @@
             <blockpin signalname="XLXN_33(11:0)" name="DWr_Data(11:0)" />
         </block>
         <block symbolname="WAVreader" name="XLXI_2">
-            <blockpin signalname="FName(7:0)" name="FName(7:0)" />
+            <blockpin signalname="XLXN_34(7:0)" name="FName(7:0)" />
             <blockpin signalname="Start" name="Start" />
             <blockpin signalname="Abort" name="Abort" />
             <blockpin signalname="SDC_MOSI" name="SDC_MOSI" />
@@ -246,8 +258,8 @@
             <blockpin signalname="Clk_50MHz" name="Clk_50MHz" />
             <blockpin name="E0" />
             <blockpin name="F0" />
-            <blockpin signalname="PS2_Rdy" name="DO_Rdy" />
-            <blockpin signalname="PS2_DO(7:0)" name="DO(7:0)" />
+            <blockpin signalname="XLXN_50" name="DO_Rdy" />
+            <blockpin signalname="XLXN_49(7:0)" name="DO(7:0)" />
             <blockpin signalname="Clk_50MHz" name="Clk_Sys" />
         </block>
         <block symbolname="SendSample" name="XLXI_5">
@@ -263,6 +275,16 @@
             <blockpin signalname="DWrCmdTest(3:0)" name="DWr_Cmd(3:0)" />
             <blockpin signalname="DWrAdrTest(3:0)" name="DWr_Adr(3:0)" />
             <blockpin signalname="DataTest(11:0)" name="DWr_Data(11:0)" />
+        </block>
+        <block symbolname="Kbd_to_ASCII" name="XLXI_6">
+            <blockpin signalname="XLXN_50" name="DataRdy" />
+            <blockpin signalname="XLXN_49(7:0)" name="DataIN(7:0)" />
+            <blockpin signalname="XLXN_34(7:0)" name="DataOUT(7:0)" />
+        </block>
+        <block symbolname="Kbd_to_ASCII" name="XLXI_7">
+            <blockpin signalname="DataRdy" name="DataRdy" />
+            <blockpin signalname="DataIN(7:0)" name="DataIN(7:0)" />
+            <blockpin signalname="DataOUT(7:0)" name="DataOUT(7:0)" />
         </block>
     </netlist>
     <sheet sheetnum="1" width="3520" height="2720">
@@ -393,14 +415,13 @@
             <wire x2="3296" y1="1024" y2="1024" x1="1744" />
         </branch>
         <branch name="Clk_50MHz">
-            <wire x2="304" y1="2096" y2="2096" x1="192" />
-            <wire x2="1248" y1="2096" y2="2096" x1="304" />
+            <wire x2="240" y1="1648" y2="1648" x1="192" />
+            <wire x2="192" y1="1648" y2="1712" x1="192" />
+            <wire x2="240" y1="1712" y2="1712" x1="192" />
+            <wire x2="192" y1="1712" y2="2096" x1="192" />
+            <wire x2="1248" y1="2096" y2="2096" x1="192" />
             <wire x2="1968" y1="2096" y2="2096" x1="1248" />
             <wire x2="2576" y1="2096" y2="2096" x1="1968" />
-            <wire x2="384" y1="1712" y2="1712" x1="304" />
-            <wire x2="304" y1="1712" y2="1776" x1="304" />
-            <wire x2="304" y1="1776" y2="2096" x1="304" />
-            <wire x2="384" y1="1776" y2="1776" x1="304" />
             <wire x2="1312" y1="1664" y2="1664" x1="1248" />
             <wire x2="1248" y1="1664" y2="1728" x1="1248" />
             <wire x2="1312" y1="1728" y2="1728" x1="1248" />
@@ -429,10 +450,6 @@
             <wire x2="1296" y1="960" y2="960" x1="176" />
             <wire x2="1312" y1="960" y2="960" x1="1296" />
         </branch>
-        <branch name="FName(7:0)">
-            <wire x2="1296" y1="896" y2="896" x1="240" />
-            <wire x2="1312" y1="896" y2="896" x1="1296" />
-        </branch>
         <instance x="1312" y="1632" name="XLXI_2" orien="R0">
         </instance>
         <branch name="XLXN_17">
@@ -448,7 +465,6 @@
             <wire x2="2032" y1="1232" y2="1232" x1="1840" />
         </branch>
         <iomarker fontsize="28" x="3312" y="1088" name="SDC_SS" orien="R0" />
-        <iomarker fontsize="28" x="240" y="896" name="FName(7:0)" orien="R180" />
         <iomarker fontsize="28" x="176" y="960" name="Start" orien="R180" />
         <iomarker fontsize="28" x="176" y="1024" name="Abort" orien="R180" />
         <iomarker fontsize="28" x="3296" y="896" name="SDC_MISO" orien="R0" />
@@ -456,24 +472,6 @@
         <iomarker fontsize="28" x="3296" y="1024" name="SDC_SCK" orien="R0" />
         <iomarker fontsize="28" x="128" y="2160" name="Reset" orien="R180" />
         <iomarker fontsize="28" x="192" y="2096" name="Clk_50MHz" orien="R180" />
-        <instance x="384" y="1808" name="XLXI_4" orien="R0">
-        </instance>
-        <branch name="PS2_Data">
-            <wire x2="384" y1="1648" y2="1648" x1="352" />
-        </branch>
-        <iomarker fontsize="28" x="352" y="1648" name="PS2_Data" orien="R180" />
-        <branch name="PS2_Clk">
-            <wire x2="384" y1="1584" y2="1584" x1="352" />
-        </branch>
-        <iomarker fontsize="28" x="352" y="1584" name="PS2_Clk" orien="R180" />
-        <branch name="PS2_DO(7:0)">
-            <wire x2="800" y1="1584" y2="1584" x1="768" />
-        </branch>
-        <iomarker fontsize="28" x="800" y="1584" name="PS2_DO(7:0)" orien="R0" />
-        <branch name="PS2_Rdy">
-            <wire x2="800" y1="1776" y2="1776" x1="768" />
-        </branch>
-        <iomarker fontsize="28" x="800" y="1776" name="PS2_Rdy" orien="R0" />
         <instance x="1024" y="560" name="XLXI_5" orien="R0">
         </instance>
         <branch name="SampRdyTest">
@@ -536,5 +534,50 @@
             <wire x2="1504" y1="528" y2="528" x1="1488" />
         </branch>
         <iomarker fontsize="28" x="1504" y="528" name="DataTest(11:0)" orien="R0" />
+        <branch name="XLXN_34(7:0)">
+            <wire x2="1200" y1="1456" y2="1456" x1="1120" />
+            <wire x2="1200" y1="896" y2="1456" x1="1200" />
+            <wire x2="1312" y1="896" y2="896" x1="1200" />
+        </branch>
+        <branch name="PS2_Data">
+            <wire x2="208" y1="1344" y2="1344" x1="192" />
+            <wire x2="208" y1="1344" y2="1584" x1="208" />
+            <wire x2="240" y1="1584" y2="1584" x1="208" />
+        </branch>
+        <branch name="PS2_Clk">
+            <wire x2="272" y1="1408" y2="1408" x1="160" />
+            <wire x2="160" y1="1408" y2="1520" x1="160" />
+            <wire x2="240" y1="1520" y2="1520" x1="160" />
+            <wire x2="272" y1="1280" y2="1280" x1="192" />
+            <wire x2="272" y1="1280" y2="1408" x1="272" />
+        </branch>
+        <iomarker fontsize="28" x="192" y="1344" name="PS2_Data" orien="R180" />
+        <iomarker fontsize="28" x="192" y="1280" name="PS2_Clk" orien="R180" />
+        <instance x="240" y="1744" name="XLXI_4" orien="R0">
+        </instance>
+        <instance x="736" y="1552" name="XLXI_6" orien="R0">
+        </instance>
+        <branch name="XLXN_49(7:0)">
+            <wire x2="736" y1="1520" y2="1520" x1="624" />
+        </branch>
+        <branch name="XLXN_50">
+            <wire x2="672" y1="1712" y2="1712" x1="624" />
+            <wire x2="672" y1="1456" y2="1712" x1="672" />
+            <wire x2="736" y1="1456" y2="1456" x1="672" />
+        </branch>
+        <instance x="800" y="2480" name="XLXI_7" orien="R0">
+        </instance>
+        <branch name="DataOUT(7:0)">
+            <wire x2="1216" y1="2384" y2="2384" x1="1184" />
+        </branch>
+        <iomarker fontsize="28" x="1216" y="2384" name="DataOUT(7:0)" orien="R0" />
+        <branch name="DataRdy">
+            <wire x2="800" y1="2384" y2="2384" x1="768" />
+        </branch>
+        <iomarker fontsize="28" x="768" y="2384" name="DataRdy" orien="R180" />
+        <branch name="DataIN(7:0)">
+            <wire x2="800" y1="2448" y2="2448" x1="768" />
+        </branch>
+        <iomarker fontsize="28" x="768" y="2448" name="DataIN(7:0)" orien="R180" />
     </sheet>
 </drawing>
